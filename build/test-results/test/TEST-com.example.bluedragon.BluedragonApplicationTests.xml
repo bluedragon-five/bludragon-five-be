@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.bluedragon.BluedragonApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-02-07T14:06:18" hostname="coliui-MacBookAir.local" time="0.309">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.example.bluedragon.BluedragonApplicationTests" time="0.309"/>
+  <system-out><![CDATA[23:06:17.878 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.bluedragon.BluedragonApplicationTests]: BluedragonApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:06:17.922 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.bluedragon.BluedragonApplication for test class com.example.bluedragon.BluedragonApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.2)
+
+2025-02-07T23:06:18.050+09:00  INFO 64204 --- [bluedragon] [    Test worker] c.e.b.BluedragonApplicationTests         : Starting BluedragonApplicationTests using Java 17.0.13 with PID 64204 (started by coli in /Users/coli/Desktop/projects/bludragon-five-be)
+2025-02-07T23:06:18.051+09:00  INFO 64204 --- [bluedragon] [    Test worker] c.e.b.BluedragonApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2025-02-07T23:06:18.252+09:00  INFO 64204 --- [bluedragon] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-07T23:06:18.258+09:00  INFO 64204 --- [bluedragon] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2025-02-07T23:06:18.375+09:00  INFO 64204 --- [bluedragon] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-02-07T23:06:18.441+09:00  INFO 64204 --- [bluedragon] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:a98ed318-3f72-490e-bc22-1d6039c05bfc user=SA
+2025-02-07T23:06:18.442+09:00  INFO 64204 --- [bluedragon] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-02-07T23:06:18.460+09:00  INFO 64204 --- [bluedragon] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-07T23:06:18.480+09:00  INFO 64204 --- [bluedragon] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-02-07T23:06:18.491+09:00  INFO 64204 --- [bluedragon] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-02-07T23:06:18.582+09:00  INFO 64204 --- [bluedragon] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-07T23:06:18.606+09:00  INFO 64204 --- [bluedragon] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-02-07T23:06:18.722+09:00  INFO 64204 --- [bluedragon] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-07T23:06:18.723+09:00  INFO 64204 --- [bluedragon] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-07T23:06:18.779+09:00  WARN 64204 --- [bluedragon] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-07T23:06:18.936+09:00  INFO 64204 --- [bluedragon] [    Test worker] c.e.b.BluedragonApplicationTests         : Started BluedragonApplicationTests in 0.966 seconds (process running for 1.377)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
