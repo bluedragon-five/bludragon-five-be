@@ -36,8 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 
-### Rest Docs
-/src/main/resources/static/docs/openapi3.yaml
+##git
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/8.12.1/executionHistory/executionHistory.bin
+.gradle/8.12.1/executionHistory/executionHistory.lock
+.gradle/8.12.1/fileHashes/fileHashes.bin
+.gradle/8.12.1/fileHashes/fileHashes.lock
 
-### application-local.yml
-/src/main/resources/application-local.yml
