@@ -14,7 +14,7 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Long> 
     @Query("""
        select s
        from Scholarship as s
-       where s.section <= :section
+       where s.section >= :section
        and s.type = :type
        and s.major = :major
        and s.attendance = :attendance
