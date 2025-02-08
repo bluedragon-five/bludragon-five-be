@@ -21,9 +21,9 @@ public class Scholarship {
 
     private String name;
 
-    private String money;
+    private long money;
 
-    private LocalDate end_date;
+    private LocalDate endDate;
 
     private long section;
 
