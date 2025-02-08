@@ -1,5 +1,6 @@
 package com.example.bluedragon.domain;
 
+import com.example.bluedragon.dto.UserRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -64,37 +65,13 @@ public class User {
     this.grade = 1;
   }
 
-  public void setLoginId(String loginId) {
-    this.loginId = loginId;
+
+  public void update(UserRequest.InfoDTO infoDTO) {
+    this.email = infoDTO.getEmail();
+    this.type = infoDTO.getType();
+    this.major = infoDTO.getMajor();
+    this.grade = infoDTO.getGrade();
+    this.section = infoDTO.getSection();
+    this.attendance = infoDTO.isAttendance();
   }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public void setSection(Long section) {
-    this.section = section;
-  }
-
-  public void setType(Type type) {
-    this.type = type;
-  }
-
-  public void setMajor(Major major) {
-    this.major = major;
-  }
-
-  public void setAttendance(Boolean attendance) {
-    this.attendance = attendance;
-  }
-
-  public void setGrade(Long grade) {
-    this.grade = grade;
-  }
-
-
 }

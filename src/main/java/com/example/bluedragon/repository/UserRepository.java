@@ -8,13 +8,6 @@ import org.springframework.stereotype.Repository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-  // signid와 password를 기준으로 사용자 찾기
-//  @Query("""
-//      select u
-//      from User u
-//      where u.loginId = :loginId
-//      and u.password = :password
-//      """)
   Optional<User> findByloginIdAndPassword(String loginId, String password);
 
   Optional<User> findByLoginId(String loginId);
