@@ -12,6 +12,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class ScholarshipService {
 
     private final ScholarshipRepository scholarshipRepository;
 
+    @Transactional(readOnly = true)
     public SearchResponses searchScholarships(SearchRequest request) {
         List<Scholarship> results = search(request.section(),
                 request.type(),
@@ -30,6 +32,7 @@ public class ScholarshipService {
         return SearchResponses.of(results);
     }
 
+    @Transactional(readOnly = true)
     public SearchResponses searchByUser(User user) {
         List<Scholarship> userResults = search(user.getGrade(),
                 user.getType(),
@@ -43,7 +46,7 @@ public class ScholarshipService {
 
     private Sort buildSort(SortCondition sortCondition) {
         if (sortCondition == SortCondition.NOTHING || sortCondition == SortCondition.MONEY) {
-            return Sort.by(Sort.Direction.ASC, "end_date");
+            return Sort.by(Sort.Direction.ASC, "endDate");
         }
         return Sort.by(Sort.Direction.DESC, "money");
     }
