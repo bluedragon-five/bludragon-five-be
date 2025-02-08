@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class ScholarShipController {
+public class ScholarShipController implements ScholarShipSwagger {
 
     private final ScholarshipService scholarshipService;
 
+    @Override
     @PostMapping("/api/scholarship")
     public ResponseEntity<SearchResponses> searchScholarShip(@RequestBody SearchRequest searchRequest) {
         SearchResponses responses = scholarshipService.searchScholarships(searchRequest);
