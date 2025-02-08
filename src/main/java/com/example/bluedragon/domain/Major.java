@@ -2,6 +2,8 @@ package com.example.bluedragon.domain;
 
 public enum Major {
 
-  HUMANITIES, SCIENCE
+  HUMANITIES,
+  SCIENCE,
+  NOTHING
 }
 
