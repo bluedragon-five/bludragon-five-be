@@ -1,0 +1,89 @@
+package com.example.bluedragon.domain;
+
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "member")
+public class User {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = "login_id", nullable = false, length = 20)
+  private String loginId;
+
+  @Column(nullable = false, length = 8)
+  private String password;
+
+  @Column(nullable = true, length = 255)
+  private String email;
+
+  @Column(nullable = false, length = 255)
+  private String section;
+
+  @Enumerated(value= EnumType.STRING)
+  @Column(nullable = false, length = 255)
+  private Type type; //이넘
+
+  @Enumerated(value= EnumType.STRING)
+  @Column(nullable = false)
+  private Major major;
+
+  @Column(nullable = false)
+  private boolean attendance;
+
+  @Column(nullable = false)
+  private long grade;
+
+
+  public void setLoginId(String loginId) {
+    this.loginId = loginId;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setSection(String section) {
+    this.section = section;
+  }
+
+  public void setType(Type type) {
+    this.type = type;
+  }
+
+  public void setMajor(Major major) {
+    this.major = major;
+  }
+
+  public void setAttendance(Boolean attendance) {
+    this.attendance = attendance;
+  }
+
+  public void setGrade(Long grade) {
+    this.grade = grade;
+  }
+
+
+}
