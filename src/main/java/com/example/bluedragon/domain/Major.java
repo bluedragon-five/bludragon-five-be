@@ -4,6 +4,8 @@ public enum Major {
 
   HUMANITIES,
   SCIENCE,
-  NOTHING
+  NOTHING,
+  ;
+
 }
 

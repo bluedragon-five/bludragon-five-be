@@ -1,6 +1,5 @@
 package com.example.bluedragon.domain;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.lang.Long;
 
 @Entity
 @Getter
@@ -36,7 +36,7 @@ public class User {
   private String email;
 
   @Column(nullable = false, length = 255)
-  private String section;
+  private Long section;
 
   @Enumerated(value= EnumType.STRING)
   @Column(nullable = false, length = 255)
@@ -53,6 +53,17 @@ public class User {
   private long grade;
 
 
+  public User(String loginId, String password) { // 생성자 오버로딩
+    // 매개값 이용 필드변수 초기화
+    this.loginId = loginId;
+    this.password = password;
+    this.type = Type.NOTHING;
+    this.major = Major.NOTHING;
+    this.section = 0L;
+    this.attendance = true;
+    this.grade = 1;
+  }
+
   public void setLoginId(String loginId) {
     this.loginId = loginId;
   }
@@ -65,7 +76,7 @@ public class User {
     this.email = email;
   }
 
-  public void setSection(String section) {
+  public void setSection(Long section) {
     this.section = section;
   }
 

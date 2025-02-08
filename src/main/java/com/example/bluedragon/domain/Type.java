@@ -5,5 +5,6 @@ public enum Type {
   ENROLLMENT,
   LIVING,
   NOTHING
+
 }
 
