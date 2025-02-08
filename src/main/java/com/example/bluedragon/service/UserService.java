@@ -8,6 +8,7 @@ import com.example.bluedragon.service.email.EmailService;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -16,10 +17,13 @@ public class UserService {
 
   private final UserRepository userRepository;
   private final EmailService emailService;
+
+  @Transactional
   public Optional<User> getUserById(long userId) {
     return userRepository.findById(userId);
   }
 
+  @Transactional
   public User createUser(SignDTO signDTO) {
     String loginId = signDTO.getLoginId();
     String password = signDTO.getPassword();
@@ -27,7 +31,7 @@ public class UserService {
     return userRepository.save(user);
   }
 
-
+  @Transactional
   public User updateUser(long userId, UserRequest.InfoDTO userDetails) {
     User user = userRepository.findById(userId)
         .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
@@ -38,6 +42,7 @@ public class UserService {
     return userRepository.save(user);
   }
 
+  @Transactional
   public User findByIdAndPw(String loginId, String password) {
     return userRepository.findByloginIdAndPassword(loginId, password)
         .orElse(null);
