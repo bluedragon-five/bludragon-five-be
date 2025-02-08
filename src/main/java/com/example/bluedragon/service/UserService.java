@@ -1,10 +1,11 @@
 package com.example.bluedragon.service;
 
+import com.example.bluedragon.DTO.UserRequest;
+import com.example.bluedragon.DTO.UserRequest.SignDTO;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -19,12 +20,18 @@ public class UserService {
 
 
   //회원가입
-  public User createUser(User user) {
-    return userRepository.save(user);
+  public User createUser(SignDTO signDTO) {
+    // SignDTO에서 User로 변환
+    String loginId = signDTO.getLoginId();
+    String password = signDTO.getPassword();
+
+    User user = new User(loginId, password);
+    // User 객체 저장
+    return userRepository.save(user);  // userRepository는 JpaRepository를 상속받는 리포지토리
   }
 
 
-  public User updateUser(String loginId, User userDetails) {
+  public User updateUser(String loginId, UserRequest.InfoFixDTO userDetails) {
     User user = userRepository.findByLoginId(loginId)
         .orElseThrow(() -> new RuntimeException("User not found with id: " + loginId));
 

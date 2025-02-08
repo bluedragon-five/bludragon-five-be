@@ -1,18 +1,17 @@
 package com.example.bluedragon.service.email;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class EmailSender {
 
     private final JavaMailSender mailSender;
 
-    public EmailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
 
     //기본적으로 구글 SMTP 서버를 이용한다.
     //본인의 계정으로 다른 이용자에게 메일을 보내는 개념이다.

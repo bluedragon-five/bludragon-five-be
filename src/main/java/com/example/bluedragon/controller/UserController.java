@@ -1,6 +1,7 @@
 package com.example.bluedragon.controller;
 
 
+import com.example.bluedragon.DTO.UserRequest;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -102,7 +103,7 @@ public class UserController {
   @PostMapping
   public User createUser(
       @Parameter(description = "User details to create", required = true)
-      @RequestBody User user
+      @RequestBody UserRequest.SignDTO user
   ) {
     return userService.createUser(user);
   }
@@ -128,7 +129,8 @@ public class UserController {
   @PostMapping("/info")
   public ResponseEntity<User> updateUser(
       @Parameter(description = "ID of the user to update") String loginId,
-      @Parameter(description = "Updated user details", required = true) @RequestBody User userDetails
+      @Parameter(description = "Updated user details", required = true)
+      @RequestBody UserRequest.InfoFixDTO userDetails
   ) {
     try {
       User updatedUser = userService.updateUser(loginId, userDetails);
