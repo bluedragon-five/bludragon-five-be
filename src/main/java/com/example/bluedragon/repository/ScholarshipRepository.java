@@ -18,6 +18,7 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Long> 
        and s.type = :type
        and s.major = :major
        and s.attendance = :attendance
+       and s.end_date >= now()
       """)
     List<Scholarship> findByCondition(long section, Type type, Major major, boolean attendance, long grade, Sort sort);
 }
