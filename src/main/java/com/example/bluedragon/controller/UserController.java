@@ -5,6 +5,8 @@ import com.example.bluedragon.dto.UserRequest;
 import com.example.bluedragon.dto.UserRequest.InfoDTO;
 import com.example.bluedragon.converter.UserConverter;
 import com.example.bluedragon.domain.User;
+import com.example.bluedragon.dto.request.LoginRequest;
+import com.example.bluedragon.dto.response.LoginResponse;
 import com.example.bluedragon.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -26,126 +28,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
 @RequiredArgsConstructor
-public class UserController {
+public class UserController implements UserControllerSwagger{
 
   private final UserService userService;
 
-  //개인 정보 조회
-  @Operation(
-      summary = "Get user by ID",
-      description = "Retrieves a specific user by their ID"
-  )
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200",
-          description = "Successfully retrieved the user",
-          content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
-      ),
-      @ApiResponse(
-          responseCode = "404",
-          description = "User not found",
-          content = @Content
-      )
-  })
-
-  @GetMapping("/{loginId}")
+  @Override
+  @GetMapping("/api/user/info")
   public ResponseEntity<InfoDTO> getUserById(
-      @Parameter(description = "ID of the user to retrieve") @PathVariable String loginId
+      @RequestParam(value = "userId") long userId
   ) {
-    Optional<User> optionalUser = userService.getUserById(loginId);
+    Optional<User> optionalUser = userService.getUserById(userId);
     User user = optionalUser.get();
-    // User를 InfoDTO로 변환
     InfoDTO infoDTO = UserConverter.toQueryDTO(user);
-    return ResponseEntity.ok(infoDTO); // InfoDTO를 응답 본문으로 반환
+    return ResponseEntity.ok(infoDTO);
   }
 
-  //로그인
-  @Operation(
-      summary = "Login",
-      description = "Login ID and Password"
-  )
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200",
-          description = "Successfully retrieved the user",
-          content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
-      ),
-      @ApiResponse(
-          responseCode = "404",
-          description = "User not found",
-          content = @Content
-      )
-  })
-  @GetMapping("/login")
-  public ResponseEntity<?> login(@RequestParam String loginId, @RequestParam String password,
-      HttpSession session) {
-    User entity = userService.findByIdAndPw(loginId, password);
+  @PostMapping("/api/user/login")
+  public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+    User entity = userService.findByIdAndPw(loginRequest.loginId(), loginRequest.password());
 
     if (entity == null) {
-      session.setAttribute("user", false);
-      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("failed");
+      return ResponseEntity.status(HttpStatus.FORBIDDEN).body("일치하는 유저 없음");
     } else {
-      session.setAttribute("user", true);
-      session.setAttribute("Id", entity.getId());
-      return ResponseEntity.ok(entity);
+      return ResponseEntity.ok(new LoginResponse(entity.getId()));
     }
-
   }
 
-  //회원가입
-  @Operation(
-      summary = "Create a new user",
-      description = "Creates a new user in the system"
-  )
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200",
-          description = "User successfully created",
-          content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
-      )
-  })
-  @PostMapping
+  @PostMapping("/api/user")
   public User createUser(
-      @Parameter(description = "User details to create", required = true)
       @RequestBody UserRequest.SignDTO user
   ) {
     return userService.createUser(user);
   }
 
-
-  //개인정보 수정
-  @Operation(
-      summary = "Update user",
-      description = "Updates an existing user's information"
-  )
-  @ApiResponses({
-      @ApiResponse(
-          responseCode = "200",
-          description = "User successfully updated",
-          content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
-      ),
-      @ApiResponse(
-          responseCode = "404",
-          description = "서버에러",
-          content = @Content
-      )
-  })
-  @PostMapping("/info")
+  @PostMapping("/api/user/info")
   public ResponseEntity<User> updateUser(
-      @Parameter(description = "ID of the user to update") String loginId,
-      @Parameter(description = "Updated user details", required = true)
+      @RequestParam(value ="userId") long userId,
       @RequestBody UserRequest.InfoDTO userDetails
 
   ) {
     try {
-      User updatedUser = userService.updateUser(loginId, userDetails);
+      User updatedUser = userService.updateUser(userId, userDetails);
       return ResponseEntity.ok(updatedUser);
     } catch (RuntimeException e) {
       return ResponseEntity.notFound().build();
     }
   }
-
-
 }
