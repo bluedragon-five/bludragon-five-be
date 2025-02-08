@@ -4,6 +4,7 @@ import com.example.bluedragon.domain.Major;
 import com.example.bluedragon.domain.Scholarship;
 import com.example.bluedragon.domain.SortCondition;
 import com.example.bluedragon.domain.Type;
+import com.example.bluedragon.domain.User;
 import com.example.bluedragon.dto.request.SearchRequest;
 import com.example.bluedragon.dto.response.SearchResponses;
 import com.example.bluedragon.repository.ScholarshipRepository;
@@ -27,6 +28,17 @@ public class ScholarshipService {
                 buildSort(request.sortCondition())
         );
         return SearchResponses.of(results);
+    }
+
+    public SearchResponses searchByUser(User user) {
+        List<Scholarship> userResults = search(user.getGrade(),
+                user.getType(),
+                user.getMajor(),
+                user.isAttendance(),
+                user.getGrade(),
+                buildSort(SortCondition.NOTHING)
+        );
+        return SearchResponses.of(userResults);
     }
 
     private Sort buildSort(SortCondition sortCondition) {
