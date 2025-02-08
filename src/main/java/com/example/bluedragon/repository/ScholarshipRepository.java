@@ -21,4 +21,15 @@ public interface ScholarshipRepository extends JpaRepository<Scholarship, Long> 
               and s.grade <= :grade
             """)
     List<Scholarship> findByCondition(long section, Type type, Major major, boolean attendance, long grade, Sort sort);
+
+    @Query("""
+             select s
+             from Scholarship as s
+             where s.section >= :section
+              and s.major = :major
+              and s.attendance = :attendance
+              and s.endDate >= now()
+              and s.grade <= :grade
+            """)
+    List<Scholarship> findByConditionNothing(long section, Major major, boolean attendance, long grade, Sort sort);
 }

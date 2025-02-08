@@ -59,6 +59,9 @@ public class ScholarshipService {
             long grade,
             Sort sort
     ) {
+        if(type==Type.NOTHING){
+            return scholarshipRepository.findByConditionNothing(section, major, attendance, grade, sort);
+        }
         return scholarshipRepository.findByCondition(section, type, major, attendance, grade, sort);
     }
 }
