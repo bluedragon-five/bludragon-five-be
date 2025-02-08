@@ -4,6 +4,7 @@ import com.example.bluedragon.dto.UserRequest;
 import com.example.bluedragon.dto.UserRequest.SignDTO;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.repository.UserRepository;
+import com.example.bluedragon.service.email.EmailService;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
   private final UserRepository userRepository;
+  private final EmailService emailService;
   public Optional<User> getUserById(long userId) {
     return userRepository.findById(userId);
   }
@@ -32,6 +34,7 @@ public class UserService {
 
     // 기존 정보를 업데이트
     user.update(userDetails);
+    emailService.sendEmail(user);
     return userRepository.save(user);
   }
 
