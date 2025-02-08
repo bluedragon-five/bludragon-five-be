@@ -1,7 +1,9 @@
 package com.example.bluedragon.service;
 
 import com.example.bluedragon.DTO.UserRequest;
+import com.example.bluedragon.DTO.UserRequest.InfoDTO;
 import com.example.bluedragon.DTO.UserRequest.SignDTO;
+import com.example.bluedragon.converter.UserConverter;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.repository.UserRepository;
 import java.util.Optional;
@@ -18,7 +20,6 @@ public class UserService {
     return userRepository.findByLoginId(loginId);
   }
 
-
   //회원가입
   public User createUser(SignDTO signDTO) {
     // SignDTO에서 User로 변환
@@ -31,7 +32,7 @@ public class UserService {
   }
 
 
-  public User updateUser(String loginId, UserRequest.InfoFixDTO userDetails) {
+  public User updateUser(String loginId, UserRequest.InfoDTO userDetails) {
     User user = userRepository.findByLoginId(loginId)
         .orElseThrow(() -> new RuntimeException("User not found with id: " + loginId));
 
@@ -45,11 +46,11 @@ public class UserService {
     return userRepository.save(user);
   }
 
-  public void deleteUser(String loginId) {
-    User user = userRepository.findByLoginId(loginId)
-        .orElseThrow(() -> new RuntimeException("User not found with id: " + loginId));
-    userRepository.delete(user);
-  }
+//  public void deleteUser(String loginId) {
+//    User user = userRepository.findByLoginId(loginId)
+//        .orElseThrow(() -> new RuntimeException("User not found with id: " + loginId));
+//    userRepository.delete(user);
+//  }
 
   public User findByIdAndPw(String loginId, String password) {
     return userRepository.findByloginIdAndPassword(loginId, password)
