@@ -2,6 +2,8 @@ package com.example.bluedragon.controller;
 
 
 import com.example.bluedragon.DTO.UserRequest;
+import com.example.bluedragon.DTO.UserRequest.InfoDTO;
+import com.example.bluedragon.converter.UserConverter;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +13,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpSession;
+import java.nio.file.attribute.UserPrincipalNotFoundException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +34,7 @@ public class UserController {
 
   private final UserService userService;
 
-  //아이디로 유저 조회
+  //개인 정보 조회
   @Operation(
       summary = "Get user by ID",
       description = "Retrieves a specific user by their ID"
@@ -46,13 +51,16 @@ public class UserController {
           content = @Content
       )
   })
+
   @GetMapping("/{loginId}")
-  public ResponseEntity<User> getUserById(
+  public ResponseEntity<InfoDTO> getUserById(
       @Parameter(description = "ID of the user to retrieve") @PathVariable String loginId
   ) {
-    return userService.getUserById(loginId)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    Optional<User> optionalUser = userService.getUserById(loginId);
+    User user = optionalUser.get();
+    // User를 InfoDTO로 변환
+    InfoDTO infoDTO = UserConverter.toQueryDTO(user);
+    return ResponseEntity.ok(infoDTO); // InfoDTO를 응답 본문으로 반환
   }
 
   //로그인
@@ -130,7 +138,8 @@ public class UserController {
   public ResponseEntity<User> updateUser(
       @Parameter(description = "ID of the user to update") String loginId,
       @Parameter(description = "Updated user details", required = true)
-      @RequestBody UserRequest.InfoFixDTO userDetails
+      @RequestBody UserRequest.InfoDTO userDetails
+
   ) {
     try {
       User updatedUser = userService.updateUser(loginId, userDetails);

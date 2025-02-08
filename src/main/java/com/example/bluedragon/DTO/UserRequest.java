@@ -25,13 +25,15 @@ public class UserRequest {
   @Getter
   @NoArgsConstructor
   @AllArgsConstructor
-  public static class InfoFixDTO{
+  public static class InfoDTO{
     String email;
     Long section;
     Type type;
     Major major;
     boolean attendance;
     long grade;
+
+
   }
 
 }
