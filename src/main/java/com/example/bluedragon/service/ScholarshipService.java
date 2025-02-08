@@ -45,7 +45,7 @@ public class ScholarshipService {
     }
 
     private Sort buildSort(SortCondition sortCondition) {
-        if (sortCondition == SortCondition.NOTHING || sortCondition == SortCondition.MONEY) {
+        if (sortCondition == SortCondition.NOTHING || sortCondition == SortCondition.TIME) {
             return Sort.by(Sort.Direction.ASC, "endDate");
         }
         return Sort.by(Sort.Direction.DESC, "money");
