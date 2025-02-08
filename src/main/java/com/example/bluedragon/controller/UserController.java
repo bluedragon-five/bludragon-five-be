@@ -1,8 +1,8 @@
 package com.example.bluedragon.controller;
 
 
-import com.example.bluedragon.DTO.UserRequest;
-import com.example.bluedragon.DTO.UserRequest.InfoDTO;
+import com.example.bluedragon.dto.UserRequest;
+import com.example.bluedragon.dto.UserRequest.InfoDTO;
 import com.example.bluedragon.converter.UserConverter;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.service.UserService;
@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.servlet.http.HttpSession;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

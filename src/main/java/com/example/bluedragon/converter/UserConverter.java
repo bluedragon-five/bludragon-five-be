@@ -1,6 +1,6 @@
 package com.example.bluedragon.converter;
 
-import com.example.bluedragon.DTO.UserRequest;
+import com.example.bluedragon.dto.UserRequest;
 import com.example.bluedragon.domain.User;
 
 public class UserConverter {

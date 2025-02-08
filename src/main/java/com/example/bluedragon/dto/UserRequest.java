@@ -1,10 +1,7 @@
-package com.example.bluedragon.DTO;
+package com.example.bluedragon.dto;
 
 import com.example.bluedragon.domain.Major;
 import com.example.bluedragon.domain.Type;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,9 +1,7 @@
 package com.example.bluedragon.service;
 
-import com.example.bluedragon.DTO.UserRequest;
-import com.example.bluedragon.DTO.UserRequest.InfoDTO;
-import com.example.bluedragon.DTO.UserRequest.SignDTO;
-import com.example.bluedragon.converter.UserConverter;
+import com.example.bluedragon.dto.UserRequest;
+import com.example.bluedragon.dto.UserRequest.SignDTO;
 import com.example.bluedragon.domain.User;
 import com.example.bluedragon.repository.UserRepository;
 import java.util.Optional;
